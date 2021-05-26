@@ -1,7 +1,17 @@
 .App {
   text-align: center;
 }
-
+.logo{
+  width: 150px
+}
+.row .catCards {
+  width: 19rem;
+  
+}
+.catPic{
+  height: auto;
+  width: auto
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

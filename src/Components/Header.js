@@ -3,14 +3,14 @@ import Navbar from 'react-bootstrap/Navbar'
 import PostNew from './PostNew'
 
 function Header() {
-    return (
-      <>
-        <Navbar className="justify-content-between">
-          <Navbar.Brand>Adoptable: South Florida</Navbar.Brand>
-        </Navbar>
-        <PostNew />
-      </>
-    )
+  return (
+    <>
+      <Navbar className="justify-content-between">
+        <img src="/adoptablesf.jpg" alt="" className="logo" />
+      </Navbar>
+      <PostNew />
+    </>
+  )
 }
 
 export default Header

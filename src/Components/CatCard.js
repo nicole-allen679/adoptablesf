@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card'
 
 function CatCard(props) {
   return (
-    <Card style={{ width: '19rem' }}>
-      <Card.Img variant="top" src={props.cat.img} />
+    <Card className="catCards">
+      <Card.Img className="catPic" variant="top" src={props.cat.img} />
       <Card.Body>
         <Card.Title>Name: {props.cat.name}</Card.Title>
         <Card.Subtitle>Age: {props.cat.age}</Card.Subtitle>
