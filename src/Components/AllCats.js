@@ -18,11 +18,12 @@ function AllCats() {
   return (
     <CardColumns>
       <Row>
-        {!catList ? (<p>Loading...</p>
-        ):(
-            catList.map(cat => {
-                return<CatCard cat={cat}/>
-            })
+        {!catList ? (
+          <p>Loading...</p>
+        ) : (
+          catList.map((cat) => {
+            return <CatCard cat={cat} />
+          })
         )}
       </Row>
     </CardColumns>
