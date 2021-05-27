@@ -1,10 +1,8 @@
 import React, { useState, useContext } from 'react'
-import firebase from 'firebase'
 import { UserAuthContext } from '../App'
-import { firebaseConfig } from '../config'
 
-firebase.initializeApp(firebaseConfig)
-const firebaseAuth = firebase.auth()
+
+
 function SignUp() {
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
