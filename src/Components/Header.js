@@ -9,9 +9,9 @@ function Header() {
     <>
       <Navbar className="justify-content-between">
         <img src="/adoptablesf.jpg" alt="" className="logo" />
+        <PostNew/>
         <SignUp/>
       </Navbar>
-      <PostNew />
     </>
   )
 }

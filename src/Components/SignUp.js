@@ -1,27 +1,38 @@
 import React, { useState, useContext } from 'react'
 import { UserAuthContext } from '../App'
 
-
-
 function SignUp() {
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
   const [firstName, setFirstName] = useState(null)
   const [lastName, setLastName] = useState(null)
   const { setUser, firebaseAuth } = useContext(UserAuthContext)
+
+  function createUser() {
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    }
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user),
+    })
+      .then((response) => response.json())
+      .then((data) => setUser(data))
+      .catch((err) => console.log(err))
+  }
+
   function signUpHandler(e) {
     e.preventDefault()
     firebaseAuth
-    .createUserWithEmailAndPassword(email, password)
-    .then((res) => {
-      setUser(res.user)
-      //   const user = {
-      //     uid: res.user.uid,
-      //     email,
-      //     firstName,
-      //     lastName,
-      //   }
-        // save "user" to database
+      .createUserWithEmailAndPassword(email, password)
+      .then((res) => {
+        const json = JSON.stringify(res.user)
+        localStorage.setItem('user', json)
+        setUser(res.user)
+        createUser()
       })
       .catch((err) => console.log(err))
   }

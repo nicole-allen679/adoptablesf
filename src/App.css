@@ -6,6 +6,7 @@
 }
 .row .catCards {
   width: 19rem;
+  margin: 10px
 }
 .catPic {
   height: auto;

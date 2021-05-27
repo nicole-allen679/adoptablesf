@@ -8,14 +8,14 @@ import './App.css'
 import firebase from 'firebase'
 import firebaseConfig from './config'
 
-firebase.initializeApp(firebaseConfig)
-const firebaseAuth = firebase.auth()
+ firebase.initializeApp(firebaseConfig)
+ const firebaseAuth = firebase.auth()
 
 export const UserAuthContext = createContext(null)
 export const CatContext = createContext(null)
 
 function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null)
+   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null)
   const [catList, setCatList] = useState(null)
   return (
     <CatContext.Provider value={{ catList, setCatList }}>

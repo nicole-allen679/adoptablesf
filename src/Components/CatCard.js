@@ -12,7 +12,6 @@ function CatCard(props) {
         <Card.Subtitle>Rescue: {props.cat.rescue}</Card.Subtitle>
         <Card.Subtitle>Email: {props.cat.email}</Card.Subtitle>
         <Card.Text>{props.cat.description}</Card.Text>
-        {/* <Button variant="primary">Go somewhere</Button> */}
       </Card.Body>
     </Card>
   )
