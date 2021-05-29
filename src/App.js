@@ -19,7 +19,7 @@ function App() {
   const [catList, setCatList] = useState(null)
   return (
     <CatContext.Provider value={{ catList, setCatList }}>
-      <UserAuthContext.Provider value={{ user, setUser, firebaseAuth }}>
+      <UserAuthContext.Provider value={{ user, setUser, firebaseAuth, firebase }}>
         <Header />
         <Container>
           <AllCats />

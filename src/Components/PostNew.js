@@ -1,70 +1,137 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { CatContext } from '../App'
+import firebase from 'firebase'
+import firebaseConfig from '../config'
 
-function PostNew(){
-    const [name, setName] = useState(null)
-    const [age, setAge] = useState(null)
-    const [breed, setBreed] = useState(null)
-    const [rescue, setRescue] = useState(null)
-    const [email, setEmail] = useState(null)
+function PostNew(props) {
+  const [name, setName] = useState(null)
+  const [age, setAge] = useState(null)
+  const [breed, setBreed] = useState(null)
+  const [rescue, setRescue] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [photoUrl, setPhotoUrl] = useState(null)
+  const [description, setDescription] = useState(null)
+  const { setCatList } = useContext(CatContext)
 
-    return(
-        <form>
-        <div class="mb-3">
-          <label for="exampleInputName" class="form-label">
-            Name
-          </label>
-          <input
-            // value={email}
-            type="name"
-            class="form-control"
-            id="exampleInputName"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputAge" class="form-label">
-            Age
-          </label>
-          <input
-            // value={password}
-            type="age"
-            class="form-control"
-            id="exampleInputAge"
-          />
-        </div>
-        <label for="exampleInputBreed" class="form-label">
-          Breed
+  function submitHandler(e) {
+    e.preventDefault()
+    const newPet = {
+      name: name,
+      age: age,
+      breed: breed,
+      rescue: rescue,
+      email: email,
+      img: photoUrl,
+      description: description,
+    }
+
+    fetch('http://localhost:5000/pets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPet),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // setNewPet(data)
+        // props.onHide()
+        setCatList(data)
+      })
+  }
+  function handleUpload(file){
+    if(!firebase.app.length) {
+      firebase.initializeApp(firebaseConfig)
+    }
+    const fileName = Date.now() + '.jpg' // TODO: make this dynamic
+    const storageRef = firebase.storage()
+    const uploadTask = storageRef.ref().child('/catPics/' + fileName).put(file);
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => { }, 
+      (error) => console.error(error),
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        setPhotoUrl(downloadURL)
+      });
+    })
+  }
+  return (
+    <form onSubmit={(e) => submitHandler(e)}>
+      <div class="mb-3">
+        <input type="file" name="file" accept="image/*" 
+        onChange={e => handleUpload(e.target.files[0])}
+        />
+        <br/>
+        <label for="exampleInputName" class="form-label">
+          Name
         </label>
         <input
-          //value={firstName}
-          type="breed"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="name"
           class="form-control"
-          id="exampleInputBreed"
+          id="exampleInputName"
         />
-        <label for="exampleInputRescue" class="form-label">
-          Rescue
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputAge" class="form-label">
+          Age
         </label>
         <input
-          //value={lastName}
-          type="rescue"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          type="age"
           class="form-control"
-          id="exampleInputRescue"
+          id="exampleInputAge"
         />
-        <label for="exampleInputEmail" class="form-label">
-          Email
-        </label>
-        <input
-          //value={lastName}
-          type="email"
-          class="form-control"
-          id="exampleInputEmail"
-        />
-        <br />
-        <input type="file" />
-        <button type="submit" class="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    )
+      </div>
+      <label for="exampleInputBreed" class="form-label">
+        Breed
+      </label>
+      <input
+        value={breed}
+        onChange={(e) => setBreed(e.target.value)}
+        type="breed"
+        class="form-control"
+        id="exampleInputBreed"
+      />
+      <label for="exampleInputRescue" class="form-label">
+        Rescue
+      </label>
+      <input
+        value={rescue}
+        onChange={(e) => setRescue(e.target.value)}
+        type="rescue"
+        class="form-control"
+        id="exampleInputRescue"
+      />
+      <label for="exampleInputEmail" class="form-label">
+        Email
+      </label>
+      <input
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        type="email"
+        class="form-control"
+        id="exampleInputEmail"
+      />
+      <label for="exampleInputDescription" class="form-label">
+        Description
+      </label>
+      <input
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        type="description"
+        class="form-control"
+        id="exampleInputDescription"
+      />
+      <br />
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  )
 }
 
 export default PostNew
