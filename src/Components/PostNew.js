@@ -39,30 +39,38 @@ function PostNew(props) {
         setCatList(data)
       })
   }
-  function handleUpload(file){
-    if(!firebase.app.length) {
+  function handleUpload(file) {
+    if (!firebase.app.length) {
       firebase.initializeApp(firebaseConfig)
     }
     const fileName = Date.now() + '.jpg' // TODO: make this dynamic
     const storageRef = firebase.storage()
-    const uploadTask = storageRef.ref().child('/catPics/' + fileName).put(file);
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => { }, 
+    const uploadTask = storageRef
+      .ref()
+      .child('/catPics/' + fileName)
+      .put(file)
+    uploadTask.on(
+      firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {},
       (error) => console.error(error),
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-        console.log('File available at', downloadURL);
-        setPhotoUrl(downloadURL)
-      });
-    })
+          console.log('File available at', downloadURL)
+          setPhotoUrl(downloadURL)
+        })
+      }
+    )
   }
   return (
     <form onSubmit={(e) => submitHandler(e)}>
       <div class="mb-3">
-        <input type="file" name="file" accept="image/*" 
-        onChange={e => handleUpload(e.target.files[0])}
+        <input
+          type="file"
+          name="file"
+          accept="image/*"
+          onChange={(e) => handleUpload(e.target.files[0])}
         />
-        <br/>
+        <br />
         <label for="exampleInputName" class="form-label">
           Name
         </label>
