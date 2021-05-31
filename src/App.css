@@ -3,14 +3,14 @@
 }
 .row .catCards {
   width: 19rem;
-  margin: 10px
+  margin: 10px;
 }
 .catPic {
   size: 2rem;
 }
 .mission {
-  padding: 7rem
+  padding: 3rem;
 }
-nav{
+.navBar {
   padding: 2rem;
 }

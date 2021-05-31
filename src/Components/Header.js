@@ -7,7 +7,7 @@ import SignIn from './SignIn'
 function Header() {
   return (
     <>
-      <Navbar className="justify-content-between">
+      <Navbar className="navBar">
         <img src="/adoptablesf.jpg" alt="" className="logo" />
         <PostNew />
         <SignIn />

@@ -25,14 +25,16 @@ function App() {
         value={{ user, setUser, firebaseAuth, firebase }}
       >
         <Header />
-        <h3 className= 'mission'>
-          OUR MISSION: Bridge the gap between dogs and cats being adopted. We
-          will do this by showing all of our cats from the rescues in South
-          Florida in one place - here. All of the cats listed here are in need
-          of their forever home. So, please take a look and find your new best
-          friend!
-        </h3>
-        <Container>
+        <Container className="mission">
+          <h3>
+            OUR MISSION: Bridge the gap between dogs and cats being adopted. We
+            will do this by showing all of our cats from the rescues in South
+            Florida in one place - here. All of the cats listed here are in need
+            of their forever home. So, please take a look and find your new best
+            friend!
+          </h3>
+        </Container>
+        <Container className="body">
           <AllCats />
         </Container>
       </UserAuthContext.Provider>
