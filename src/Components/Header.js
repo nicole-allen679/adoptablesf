@@ -1,4 +1,3 @@
-import { Modal } from 'bootstrap'
 import SignUp from './SignUp'
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
