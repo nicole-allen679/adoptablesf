@@ -22,7 +22,7 @@ function AllCats() {
           <p>Loading...</p>
         ) : (
           catList.map((cat) => {
-            return <CatCard cat={cat} key={cat.id} />
+            return <CatCard cat={cat} key={cat.id} adopted={cat.adopted} />
           })
         )}
       </Row>

@@ -1,5 +1,5 @@
-import SignUp from './SignUp'
 import React from 'react'
+import SignUp from './SignUp'
 import Navbar from 'react-bootstrap/Navbar'
 import PostNew from './PostNew'
 import SignIn from './SignIn'
@@ -9,9 +9,11 @@ function Header() {
     <>
       <Navbar className="navBar">
         <img src="/adoptablesf.jpg" alt="" className="logo" />
-        <PostNew />
-        <SignIn />
-        <SignUp />
+        <div className="buttons">
+          <PostNew />
+          <SignIn />
+          <SignUp />
+        </div>
       </Navbar>
     </>
   )

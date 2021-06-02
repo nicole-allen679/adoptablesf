@@ -2,23 +2,25 @@ import React, { useState, useContext } from 'react'
 import { UserAuthContext } from '../App'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import firebase from 'firebase'
 
 function SignUp() {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [firstName, setFirstName] = useState(null)
-  const [lastName, setLastName] = useState(null)
-  const { setUser, firebaseAuth } = useContext(UserAuthContext)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const { setUser } = useContext(UserAuthContext)
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  function createUser() {
+  function createUser(uid) {
     const user = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
+      firstName,
+      lastName,
+      email,
+      uid,
     }
     fetch('http://localhost:5000/users', {
       method: 'POST',
@@ -31,20 +33,21 @@ function SignUp() {
   }
 
   function signUpHandler(e) {
-    e.preventDefault()
-    firebaseAuth
+    firebase
+      .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
         const json = JSON.stringify(res.user)
         localStorage.setItem('user', json)
         setUser(res.user)
-        createUser()
+        createUser(res.user.uid)
       })
       .catch((err) => console.log(err))
+      handleClose()
   }
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="dark" onClick={handleShow}>
         Sign Up
       </Button>
 
@@ -54,55 +57,59 @@ function SignUp() {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={(e) => signUpHandler(e)}>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
                 Email address
               </label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                class="form-control"
+                className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
               />
             </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
                 Password
               </label>
               <input
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="exampleInputPassword1"
               />
             </div>
-            <label for="exampleInputFirstName" class="form-label">
+            <label htmlFor="exampleInputFirstName" className="form-label">
               First Name
             </label>
             <input
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               type="firstName"
-              class="form-control"
+              className="form-control"
               id="exampleInputFirstName"
             />
-            <label for="exampleInputLastName" class="form-label">
+            <label htmlFor="exampleInputLastName" className="form-label">
               Last Name
             </label>
             <input
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               type="lastName"
-              class="form-control"
+              className="form-control"
               id="exampleInputLastName"
             />
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            type="submit"
+            variant="primary"
+            onClick={() => signUpHandler()}
+          >
             Submit
           </Button>
         </Modal.Footer>

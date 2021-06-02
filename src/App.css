@@ -1,3 +1,9 @@
+#root {
+  background-color: rgba(173, 86, 255, 0.253);
+  border-style: dotted;
+  border-width: 2rem;
+}
+
 .logo {
   width: 150px;
 }
@@ -5,12 +11,31 @@
   width: 19rem;
   margin: 10px;
 }
-.catPic {
-  size: 2rem;
-}
+
 .mission {
-  padding: 3rem;
+  padding: 2rem;
+  border-style: dashed;
+  border-width: 5px;
 }
 .navBar {
   padding: 2rem;
+  justify-content: space-between !important;
+}
+.adopted {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(./assets/adopted.png);
+  z-index: 99;
+  background-position: center 66%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events:none;
+}
+.buttons {
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
 }

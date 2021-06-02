@@ -5,14 +5,14 @@ import { CatContext } from '../App'
 import firebase from 'firebase'
 import firebaseConfig from '../config'
 
-function PostNew(props) {
-  const [name, setName] = useState(null)
-  const [age, setAge] = useState(null)
-  const [breed, setBreed] = useState(null)
-  const [rescue, setRescue] = useState(null)
-  const [email, setEmail] = useState(null)
-  const [photoUrl, setPhotoUrl] = useState(null)
-  const [description, setDescription] = useState(null)
+function PostNew() {
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [breed, setBreed] = useState('')
+  const [rescue, setRescue] = useState('')
+  const [email, setEmail] = useState('')
+  const [photoUrl, setPhotoUrl] = useState('')
+  const [description, setDescription] = useState('')
   const { setCatList } = useContext(CatContext)
   const [show, setShow] = useState(false)
 
@@ -20,7 +20,6 @@ function PostNew(props) {
   const handleShow = () => setShow(true)
 
   function submitHandler(e) {
-    e.preventDefault()
     const newPet = {
       name: name,
       age: age,
@@ -40,10 +39,10 @@ function PostNew(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // setNewPet(data)
-        // props.onHide()
         setCatList(data)
+        handleClose()
       })
+      .catch((err) => console.error(err))
   }
   function handleUpload(file) {
     if (!firebase.app.length) {
@@ -69,7 +68,7 @@ function PostNew(props) {
   }
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="dark" onClick={handleShow}>
         New
       </Button>
 
@@ -79,7 +78,7 @@ function PostNew(props) {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={(e) => submitHandler(e)}>
-            <div class="mb-3">
+            <div className="mb-3">
               <input
                 type="file"
                 name="file"
@@ -87,73 +86,77 @@ function PostNew(props) {
                 onChange={(e) => handleUpload(e.target.files[0])}
               />
               <br />
-              <label for="exampleInputName" class="form-label">
+              <label htmlFor="exampleInputName" className="form-label">
                 Name
               </label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="name"
-                class="form-control"
+                className="form-control"
                 id="exampleInputName"
               />
             </div>
-            <div class="mb-3">
-              <label for="exampleInputAge" class="form-label">
+            <div className="mb-3">
+              <label htmlFor="exampleInputAge" className="form-label">
                 Age
               </label>
               <input
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 type="age"
-                class="form-control"
+                className="form-control"
                 id="exampleInputAge"
               />
             </div>
-            <label for="exampleInputBreed" class="form-label">
+            <label htmlFor="exampleInputBreed" className="form-label">
               Breed
             </label>
             <input
               value={breed}
               onChange={(e) => setBreed(e.target.value)}
               type="breed"
-              class="form-control"
+              className="form-control"
               id="exampleInputBreed"
             />
-            <label for="exampleInputRescue" class="form-label">
+            <label htmlFor="exampleInputRescue" className="form-label">
               Rescue
             </label>
             <input
               value={rescue}
               onChange={(e) => setRescue(e.target.value)}
               type="rescue"
-              class="form-control"
+              className="form-control"
               id="exampleInputRescue"
             />
-            <label for="exampleInputEmail" class="form-label">
+            <label htmlFor="exampleInputEmail" className="form-label">
               Email
             </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail"
             />
-            <label for="exampleInputDescription" class="form-label">
+            <label htmlFor="exampleInputDescription" className="form-label">
               Description
             </label>
             <input
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               type="description"
-              class="form-control"
+              className="form-control"
               id="exampleInputDescription"
             />
           </form>
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>
+          <Button
+            type="submit"
+            variant="primary"
+            onClick={() => submitHandler()}
+          >
             Submit
           </Button>
         </Modal.Footer>
