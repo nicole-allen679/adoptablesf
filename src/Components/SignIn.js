@@ -8,7 +8,7 @@ function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [show, setShow] = useState(false)
-  const { setUser } = useContext(UserAuthContext)
+  const { user, setUser } = useContext(UserAuthContext)
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -27,9 +27,12 @@ function SignIn() {
   }
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        Login
-      </Button>
+      {!user && (
+        <Button variant="dark" onClick={handleShow}>
+          Login
+        </Button>
+      )}
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Login with Email and Password</Modal.Title>
@@ -64,7 +67,7 @@ function SignIn() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={() => formHandler()}>
+          <Button variant="dark" onClick={() => formHandler()}>
             Sign in
           </Button>
         </Modal.Footer>

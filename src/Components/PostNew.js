@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import { CatContext } from '../App'
+import { UserAuthContext, CatContext } from '../App'
 import firebase from 'firebase'
 import firebaseConfig from '../config'
 
@@ -13,6 +13,7 @@ function PostNew() {
   const [email, setEmail] = useState('')
   const [photoUrl, setPhotoUrl] = useState('')
   const [description, setDescription] = useState('')
+  const { user } = useContext(UserAuthContext)
   const { setCatList } = useContext(CatContext)
   const [show, setShow] = useState(false)
 
@@ -68,9 +69,11 @@ function PostNew() {
   }
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        New
-      </Button>
+      {user && (
+        <Button variant="dark" onClick={handleShow}>
+          New
+        </Button>
+      )}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -152,11 +155,7 @@ function PostNew() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            type="submit"
-            variant="primary"
-            onClick={() => submitHandler()}
-          >
+          <Button type="submit" variant="dark" onClick={() => submitHandler()}>
             Submit
           </Button>
         </Modal.Footer>

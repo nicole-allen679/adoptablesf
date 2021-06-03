@@ -1,6 +1,8 @@
 import React from 'react'
-import SignUp from './SignUp'
 import Navbar from 'react-bootstrap/Navbar'
+import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
+import SignUp from './SignUp'
 import PostNew from './PostNew'
 import SignIn from './SignIn'
 
@@ -8,8 +10,13 @@ function Header() {
   return (
     <>
       <Navbar className="navBar">
-        <img src="/adoptablesf.jpg" alt="" className="logo" />
+      <Link to={`/`}>
+        <img src="/adoptablesf.jpg" alt="" className="logo" />    
+          </Link>
         <div className="buttons">
+          <Link to={`/`}>
+            <Button variant="dark">Home</Button>
+          </Link>
           <PostNew />
           <SignIn />
           <SignUp />

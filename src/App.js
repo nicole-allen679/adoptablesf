@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import firebase from 'firebase'
 import firebaseConfig from './config'
-import PetDetail from './Components/PetDetail'
+import PetDetail from './scenes/PetDetail'
 
 firebase.initializeApp(firebaseConfig)
 const firebaseAuth = firebase.auth()
@@ -28,15 +28,6 @@ function App() {
           value={{ user, setUser, firebaseAuth, firebase }}
         >
           <Header />
-          <Container className="mission">
-            <h3>
-              OUR MISSION: Bridge the gap between dogs and cats being adopted.
-              We will do this by showing all of our cats from the rescues in
-              South Florida in one place - here. All of the cats listed here are
-              in need of their forever home. So, please take a look and find
-              your new best friend!
-            </h3>
-          </Container>
           <Container className="body">
             <Switch>
               <Route path='/pets/:id' component={PetDetail} />

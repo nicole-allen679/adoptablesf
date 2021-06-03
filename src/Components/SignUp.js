@@ -9,7 +9,7 @@ function SignUp() {
   const [password, setPassword] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const { setUser } = useContext(UserAuthContext)
+  const { user, setUser } = useContext(UserAuthContext)
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -29,7 +29,7 @@ function SignUp() {
     })
       .then((response) => response.json())
       .then((data) => setUser(data))
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
   }
 
   function signUpHandler(e) {
@@ -42,14 +42,16 @@ function SignUp() {
         setUser(res.user)
         createUser(res.user.uid)
       })
-      .catch((err) => console.log(err))
-      handleClose()
+      .catch((err) => console.error(err))
+    handleClose()
   }
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
-        Sign Up
-      </Button>
+      {!user && (
+        <Button variant="dark" onClick={handleShow}>
+          Sign Up
+        </Button>
+      )}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -105,11 +107,7 @@ function SignUp() {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            type="submit"
-            variant="primary"
-            onClick={() => signUpHandler()}
-          >
+          <Button type="submit" variant="dark" onClick={() => signUpHandler()}>
             Submit
           </Button>
         </Modal.Footer>
