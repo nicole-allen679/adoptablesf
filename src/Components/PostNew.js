@@ -31,7 +31,7 @@ function PostNew() {
       description: description,
     }
 
-    fetch('http://localhost:5000/pets', {
+    fetch('https://adoptablesf-na.web.app/pets', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -23,14 +23,30 @@ function SignIn() {
         setUser(res.user)
         handleClose()
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.log(err))
+  }
+  const logOut = () => {
+    localStorage.clear()
+    window.location.reload(false)
+    firebase
+      .auth()
+      .signOut()
+      .then((res) => {
+        console.log(res)
+        //res.send('Sign Out Successful')
+      })
+      .catch((error) => {
+        console.error('error with log out')
+      })
   }
   return (
     <>
-      {!user && (
+      {!user ? (
         <Button variant="dark" onClick={handleShow}>
-          Login
+          Sign In
         </Button>
+      ):(
+        <Button variant="dark" onClick={logOut}>Sign Out</Button>
       )}
 
       <Modal show={show} onHide={handleClose}>

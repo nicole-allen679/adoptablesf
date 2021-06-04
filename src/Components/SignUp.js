@@ -22,7 +22,7 @@ function SignUp() {
       email,
       uid,
     }
-    fetch('http://localhost:5000/users', {
+    fetch('https://adoptablesf-na.web.app/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),

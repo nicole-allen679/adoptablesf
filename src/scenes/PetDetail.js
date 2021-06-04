@@ -7,7 +7,7 @@ function PetDetail() {
   const { id } = useParams()
 
   useEffect(() => {
-    fetch(`http://localhost:5000/pets/${id}`)
+    fetch(`https://adoptablesf-na.web.app/pets/${id}`)
       .then((response) => response.json())
       .then((data) => setPet(data))
       .catch((err) => console.error(err))

@@ -11,7 +11,7 @@ function Header() {
     <>
       <Navbar className="navBar">
       <Link to={`/`}>
-        <img src="/adoptablesf.jpg" alt="" className="logo" />    
+        <img src="/adoptablesf.png" alt="" className="logo" />    
           </Link>
         <div className="buttons">
           <Link to={`/`}>

@@ -9,7 +9,7 @@ function AllCats() {
   const { catList, setCatList } = useContext(CatContext)
 
   useEffect(() => {
-    fetch('http://localhost:5000/pets')
+    fetch('https://adoptablesf-na.web.app/pets')
       .then((response) => response.json())
       .then((data) => setCatList(data))
       .catch((err) => console.error(err.message))
