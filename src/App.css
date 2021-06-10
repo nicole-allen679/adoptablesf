@@ -3,7 +3,10 @@
   border-style: dotted;
   border-width: 2rem;
 }
-
+.imgDetail{
+  height: 400px;
+  width: auto
+}
 .logo {
   width: 150px;
 }

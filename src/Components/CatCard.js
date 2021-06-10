@@ -7,7 +7,7 @@ function CatCard(props) {
   return (
     <Card className="catCards">
       {props.cat.adopted && <div className="adopted"></div>}
-      <Card.Img className="img-thumbnail" variant="top" src={props.cat.img} />
+      <Card.Img className="imgThumbnail" variant="top" src={props.cat.img} />
       <Card.Body>
         <Card.Title>Name: {props.cat.name}</Card.Title>
         <Link to={`/pets/${props.cat.id}`}>

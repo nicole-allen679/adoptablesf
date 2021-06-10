@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
 import { useParams } from 'react-router-dom'
+import '../App.css'
 
 function PetDetail() {
   const [pet, setPet] = useState()
@@ -22,7 +23,7 @@ function PetDetail() {
           <Card.Header><h1>{pet.name}</h1>
           {pet.adopted && <div className="adopted"></div>}
           </Card.Header>
-          <Card.Img variant="top" src={pet.img} />
+          <Card.Img className="imgDetail" variant="top" src={pet.img} />
           {pet.adopted && <div className="adopted"></div>}
           <Card.Body>
             <Card.Text>
