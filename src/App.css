@@ -1,17 +1,18 @@
 #root {
-  background-color: rgba(173, 86, 255, 0.253);
-  border-style: dotted;
-  border-width: 2rem;
+  background-image: linear-gradient( rgb(79, 0, 113), rgba(191, 0, 255, 0.486), rgba(0, 251, 255, 0.486));
 }
-
+.detailPage{
+  justify-content: center;
+}
 .logo {
   width: 150px;
 }
 .row .catCards {
   width: 19rem;
   margin: 10px;
+  padding: 25px;
+  text-align: center;
 }
-
 .mission {
   padding: 2rem;
   border-style: dashed;
@@ -29,7 +30,7 @@
   left: 0;
   background-image: url(./assets/adopted.png);
   z-index: 99;
-  background-position: center 83%;
+  background-position: center 80%;
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;

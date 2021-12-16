@@ -15,15 +15,15 @@ function PetDetail() {
   }, [id])
 
   return (
-    <>
+    <div className='detailPage'>
       {!pet ? (
         <p>Loading...</p>
       ) : (
-        <Card>
+        <Card style={{width: '900px', marginLeft:'200px'}}>
           <Card.Header><h1>{pet.name}</h1>
           {pet.adopted && <div className="adopted"></div>}
           </Card.Header>
-          <Card.Img className="imgDetail" variant="top" src={pet.img} />
+          <Card.Img style={{width: '50%'}} variant="top" src={pet.img} />
           {pet.adopted && <div className="adopted"></div>}
           <Card.Body>
             <Card.Text>
@@ -36,7 +36,7 @@ function PetDetail() {
           </Card.Body>
         </Card>
       )}
-    </>
+    </div>
   )
 }
 
